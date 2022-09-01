@@ -5,6 +5,7 @@
 
 
 ECommerce.API/bin/
+ECommerce.API/bin/*
 
 
 # User-specific files
