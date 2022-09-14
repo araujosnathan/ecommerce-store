@@ -1,9 +1,10 @@
 ﻿using ECommerce.IdentityServer;
+using ECommerce.IdentityServer.Initializer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
+IDbInitializer initializer;
 
 //// Add Databse Context
 var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
@@ -29,6 +30,8 @@ builder.Services.AddIdentityServer(options =>
 .AddAspNetIdentity<ApplicationUser>()
 .AddDeveloperSigningCredential();
 
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -48,6 +51,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseIdentityServer();
+
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+
+using (var scope = scopeFactory.CreateScope())
+{
+    var dbInitializer = scope.ServiceProvider.GetService<IDbInitializer>();
+    dbInitializer.Initialize();
+}
 
 app.UseAuthorization();
 

@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'ID' " />
   <ItemGroup>
     <None Remove="Model\" />
     <None Remove="Model\Context\" />
@@ -14,16 +15,25 @@
     <None Remove="Duende.IdentityServer.AspNetIdentity" />
     <None Remove="Pomelo.EntityFrameworkCore.MySql" />
     <None Remove="Configuration\" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Initializer\" />
+    <None Remove="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
     <Folder Include="Model\Context\" />
     <Folder Include="Configuration\" />
+    <Folder Include="Initializer\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.8" />
     <PackageReference Include="Duende.IdentityServer.AspNetIdentity" Version="6.1.5" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.9">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 </Project>
